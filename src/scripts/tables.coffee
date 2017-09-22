@@ -601,6 +601,11 @@ class ContentEdit.TableCellText extends ContentEdit.Text
                 # Move the focus to the first cell in the new row
                 row.children[0].tableCellText().focus()
 
+            else if grandParent.tagName() == 'tfoot' and @_isLastInSection()
+                # If in tfoot and last cell, assume the next action will not be
+                # inside the table, so create new Paragraph
+                ContentTools.Tools.Paragraph.apply(this, null, () ->)
+
             # If not the last table cell navigate to the next cell
             else
                 @nextContent().focus()
